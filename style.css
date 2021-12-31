@@ -1,0 +1,69 @@
+body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+.outer-div{
+    height: 70%;
+    width: 50%;
+    background-color: grey;
+    border: 1px solid black;
+    margin: 10px 5px 7px 5px;
+    box-sizing: border-box;
+}
+
+.heading-div{
+    height: 15%;
+    width: auto;
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    margin: 20px 10px;
+}
+
+.screen-div{
+    height: 25%;
+    min-height: 100px;
+    width: auto;
+    border: 1px solid black;
+    margin: 20px 10px;
+    background-color: white;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+
+.btn-div{
+    height: 60%;
+    width: auto;
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+
+button{
+    width: 25%;
+    height: 50px;
+    background-color: white;
+    margin: 2px;
+    text-align: center;
+}
+
+.red-color{
+    background-color: tomato;
+    color: white;
+}
+
+.grow-flex{
+    flex-grow: 2;
+}
+
