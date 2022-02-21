@@ -29,7 +29,7 @@ function suggestions(data){
             })
         }
     }
-    xhrSearchRequest.open('get', `http://www.omdbapi.com/?t=${data}&apikey=4dd18108`, true);
+    xhrSearchRequest.open('get', `https://www.omdbapi.com/?t=${data}&apikey=4dd18108`, true);
     xhrSearchRequest.send();
 }
 
@@ -141,7 +141,7 @@ function fetch_movies_list(data){
         clearAllLi();
     }
 
-    xhrRequest.open('get', 'http://www.omdbapi.com/?t=' + data + '&apikey=4dd18108', true);
+    xhrRequest.open('get', 'https://www.omdbapi.com/?t=' + data + '&apikey=4dd18108', true);
     xhrRequest.send();
     // window.open('http://www.omdbapi.com/?t=' + data + '&apikey=4dd18108');
 }
