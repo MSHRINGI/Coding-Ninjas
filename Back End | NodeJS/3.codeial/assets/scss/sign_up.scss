@@ -1,0 +1,28 @@
+main{
+    padding: 2%;
+    #signUpDiv{
+        background-color: darksalmon;
+        form{
+            div{
+                font-size: 1.1rem;
+                padding: 0.5rem;
+                div{
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    color: maroon;
+                    font-size: 1.5rem;
+                }
+                input{
+                    padding: 10px;
+                    // border-radius: 10px;
+                    width: 60%;
+                    border: none;
+                    background: transparent;
+                    border-bottom: 2px solid maroon;
+                    color: maroon;
+                }
+            }
+        }
+    }
+}
