@@ -1,0 +1,12 @@
+<li>
+    <p>
+        <%= comment.content %>
+        <% if(locals.user && (comment.user.id == locals.user.id || post.user.id == locals.user.id) ){%>
+            <a href="/comments/destroy/<%= comment.id%>">
+                <small><button type="button" class="btn btn-danger mx-1 btn-sm"><i class="fas fa-trash-alt"></i></button></small>
+            </a>    
+        <%}%>
+        <br>
+        <small class="text-secondary"><%= comment.user.name %></small>
+    </p>
+</li>

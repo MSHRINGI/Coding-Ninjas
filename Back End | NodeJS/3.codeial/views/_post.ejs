@@ -1,0 +1,34 @@
+<li class="card p-2 m-2 border-0 shadow">
+    <p>
+        
+        <span class="fs-3"><%= post.content %></span>
+        <% if(locals.user && post.user.id == locals.user.id) {%>
+            <a href="/posts/destroy/<%= post.id%>">
+                <small><button type="button" class="btn btn-danger mx-1 btn-sm"><i class="fas fa-trash-alt"></i></button></small>
+            </a>    
+        <%}%>
+        <br>
+        <small class="text-secondary"><%= post.user.name %></small>
+    </p>
+
+    <div class="post-comments card bg-light p-3 border-0">
+        <% if(locals.user) { %>
+            <form action="/comments/create" method="post" class="p-2">
+
+                <div class="input-group mb-3">
+                    <input type="text" name="content" class="form-control" placeholder="Type comments here..." required>
+                    <input type="hidden" name="post" value="<%= post._id%>">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-angle-right"></i></button>
+                </div>
+
+            </form>
+        <%}%>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id %>">
+                <% for(comment of post.comments) {%>
+                    <%- include('_comment.ejs') -%>    
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</li>
