@@ -1,0 +1,53 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+input{
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+button{
+    font-size: 20px;
+    background-color: darkgreen;
+    color: white;
+}
+
+#page-heading{
+    text-align: center;
+    color: grey;
+}
+
+#outer-most-div{
+    /* display: flex;
+    justify-content: center; */
+    text-align: center;
+    /* border: 1px solid grey; */
+}
+
+#outer-div{
+    height: auto;
+    width: 40%;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid grey;
+    background-color: grey;
+    color: white;
+    margin-left: 29%;
+    padding: 5px 10px;
+}
+#outer-div:hover{
+    background-color: blueviolet;
+}
+
+#close_button i{
+    background-color: white;
+    color: red;
+}

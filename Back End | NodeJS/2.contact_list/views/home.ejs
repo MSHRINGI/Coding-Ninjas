@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7be81cecf1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <title> <%= title %> </title>
+</head>
+<body>
+    <h1 id="page-heading">
+        <span><i class="fas fa-address-book"></i></span>
+        My Contacts List
+    </h1>
+
+    <!-- <table border="2">
+        <tr>
+            <th>Name</th>
+            <th>Phone No.</th>
+        </tr>
+        <% for(let i of contact_list) { %>
+            <tr> <p><%= i.name %></p></tr>
+            <tr> <p><%= i.phone %> </p></tr>  
+        <% } %>
+
+    </table> -->
+
+   <div id="outer-most-div">
+        <ul>
+            <% for(let i of contact_list) { %>
+                <li>
+                    <div id="outer-div">
+                        <div>
+                            <span><i class="fas fa-user"></i></span>
+                            <span> <%= i.name %> </span>
+                        </div>
+                        <div>
+                            <span> <%= i.phone %> </span>
+                        </div>
+                        <div>
+                            <a href="/delete-contact/?id=<%= i._id %>" id="close_button">
+                                <i class="far fa-window-close"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>    
+                
+            <% } %>
+        </ul>
+
+        <form action="create-contact" method="post">
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="number" name="phone" placeholder="Enter Phone No." required>
+            <button type="submit">Add Contact</button>
+        </form>
+   </div>
+
+   
+
+   <script type="text/javascript" src="/js/home.js"></script>
+
+</body>
+</html>
