@@ -3,9 +3,31 @@ const User = require('../models/user');
 
 module.exports.profile = function(req, res){
     // return res.end('<h1> At users profile </h1>');
-    res.render('user', {
-        title : 'profile'
-    });
+    User.findById(req.params.id, function(err, user){
+        if(err){
+            console.log("Error in finding the user you are searching");
+            return res.redirect('/');
+        }
+        res.render('user', {
+            title : user.name,
+            profile_user : user
+        });
+    })
+    
+}
+
+module.exports.update = function(req, res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            if(err){
+                console.log("Error in updating the user details");
+                return res.redirect('/');
+            }
+            return res.redirect('/users/profile/<%= req.user.id %>');
+        })
+    }else{
+        return res.status(401);
+    }
 }
 
 // get the sign_in

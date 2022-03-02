@@ -1,22 +1,39 @@
 <link rel="stylesheet" href="/css/home.css">
-<h1> This is the home page of <%= title %>.</h1>
+<!-- <h1> This is the home page of <%= title %>.</h1> -->
 
-<section id="feed-posts">
-    <h4>Posts</h4> 
-    <% if(locals.user) {%>
-        <form action="/posts/create/" method="post">
-            <textarea name="content" cols="60" rows="3" placeholder="What is in your mind..." required></textarea>
-            <button type="submit" class="btn btn-primary">Post</button>
-        </form>
-    <%} else {%>
-        <small>Login first for adding posts</small>
-    <% } %>
-
-    <div id="posts-list-container">
-        <ul>
-            <% for(post of posts) {%>
-                <%- include('_post.ejs') -%>
-            <%}%>
-        </ul>
+<div class="d-flex">
+    <div class="w-75">
+        <section id="feed-posts">
+            <h4>Posts</h4> 
+            <% if(locals.user) {%>
+                <form action="/posts/create/" method="post">
+                    <textarea name="content" cols="60" rows="3" placeholder="What is in your mind..." required></textarea>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </form>
+            <%} else {%>
+                <small>Login first for adding posts</small>
+            <% } %>
+        
+            <div id="posts-list-container">
+                <ul>
+                    <% for(post of posts) {%>
+                        <%- include('_post.ejs') -%>
+                    <%}%>
+                </ul>
+            </div>
+        </section>
     </div>
-</section>
+    
+    <div class="w-25 card border-0 p-2 m-2">
+        <section id="user-friends">
+            <% if(locals.user) {%>
+                <h4>Friends</h4>
+                <% for(u of all_users) {%>
+                    <p>
+                        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+                    </p>   
+                <%}%>
+            <%}%>
+        </section>
+    </div>
+</div>
