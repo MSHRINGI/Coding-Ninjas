@@ -21,8 +21,13 @@ module.exports.update = function(req, res){
         User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
             if(err){
                 console.log("Error in updating the user details");
+                req.flash('error', "Error in updating the user details");
                 return res.redirect('/');
             }
+            console.log("user updated successfully");
+            console.log("req.flash", req.flash);
+            console.log("req.user", req.user);
+            req.flash("success", "Updated successfully");
             return res.redirect('/users/profile/<%= req.user.id %>');
         })
     }else{
@@ -57,7 +62,8 @@ module.exports.create = function(req, res){
     if(req.body.password != req.body.confirm_password){
         // alert("Password has not matched");
         // location.reload();
-        console.log("Password has not matched while sign up");
+        // console.log("Password has not matched while sign up");
+        req.flash('error', "Password did not match!");
         return res.redirect('back');
     }
     User.findOne({email : req.body.email}, function(err, user){
@@ -71,21 +77,25 @@ module.exports.create = function(req, res){
                     console.log("Error in creating the user while sign up");
                     return;
                 }
-                return res.redirect('/users/profile');
+                req.flash('success', 'User created successfully');
+                return res.redirect('/');
             })
         }else{
-            return res.redirect('back');
+            req.flash('error', 'User already exist!');
+            return res.redirect('/users/sign-in');
         }
     })
 }
 
 // sign in data
 module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged in successfully');
     return res.redirect('/');
 }
 
 // for sign-out
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success', 'You have logged out');
     return res.redirect('/');
 }

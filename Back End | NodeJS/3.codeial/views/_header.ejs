@@ -11,7 +11,7 @@
             <div class="col-3">
                 <% if(locals.user) {%>
                     <div class="col-12">
-                        <a href="/users/profile"><button type="button" class="btn btn-success m-2"><%= user.name%></button></a>
+                        <a href="/users/profile/<%= locals.user.id %>"><button type="button" class="btn btn-success m-2"><%= user.name%></button></a>
                         <a href="/users/sign-out"><button type="button" class="btn btn-warning m-2">Sign Out</button></a>
                     </div>
                 <%} else {%>

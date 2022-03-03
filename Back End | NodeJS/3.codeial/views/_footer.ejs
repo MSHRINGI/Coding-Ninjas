@@ -12,7 +12,12 @@
             </div>
             <div class="col-2">
                 <p><a href="/">Home</a></p>
-                <p><a href="/users/profile">Profile</a></p>
+                <% if(locals.user){%>
+                    <p><a href="/users/profile/<%= locals.user.id %>">Profile</a></p>
+                <%}else{%>
+                    <p><a href="/users/profile/sign-in">Profile</a></p>
+                <%}%>
+                
             </div>
         </div>
     </div>
