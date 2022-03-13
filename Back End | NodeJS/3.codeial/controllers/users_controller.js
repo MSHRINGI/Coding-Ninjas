@@ -1,5 +1,7 @@
 
 const User = require('../models/user');
+const path = require('path');
+const fs = require('fs');
 
 module.exports.profile = function(req, res){
     // return res.end('<h1> At users profile </h1>');
@@ -16,22 +18,54 @@ module.exports.profile = function(req, res){
     
 }
 
-module.exports.update = function(req, res){
+module.exports.update = async function(req, res){
+    // previous code
+    // if(req.user.id == req.params.id){
+    //     User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         if(err){
+    //             console.log("Error in updating the user details");
+    //             req.flash('error', "Error in updating the user details");
+    //             return res.redirect('/');
+    //         }
+    //         console.log("user updated successfully");
+    //         console.log("req.flash", req.flash);
+    //         console.log("req.user", req.user);
+    //         req.flash("success", "Updated successfully");
+    //         return res.redirect('/users/profile/<%= req.user.id %>');
+    //     })
+    // }else{
+    //     return res.status(401);
+    // }
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-            if(err){
-                console.log("Error in updating the user details");
-                req.flash('error', "Error in updating the user details");
-                return res.redirect('/');
-            }
-            console.log("user updated successfully");
-            console.log("req.flash", req.flash);
-            console.log("req.user", req.user);
-            req.flash("success", "Updated successfully");
-            return res.redirect('/users/profile/<%= req.user.id %>');
-        })
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req, res, function(err){
+                if(err){
+                    console.log("***Error in multer", err);
+                    return res.redirect('back');
+                }
+                // console.log(req.file);
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if(req.file){
+                    if(user.avatar){
+                        fs.rmSync(path.join(__dirname, "..", user.avatar));
+                    }
+                    user.avatar = User.avatarPath + "/" + req.file.filename;
+                }
+                user.save();
+                req.flash("success", "Updated successfully");
+                return res.redirect('back');
+            })
+
+        }catch(err){
+            console.log("Error", err);
+            return res.redirect('back');
+        }
+
     }else{
-        return res.status(401);
+        req.flash('error', "Unauthorized!");
+        return res.status(401).send('Unauthorized');
     }
 }
 
