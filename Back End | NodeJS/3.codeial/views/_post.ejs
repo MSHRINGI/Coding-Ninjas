@@ -1,9 +1,9 @@
-<li class="card p-2 m-2 border-0 shadow">
+<li class="card p-2 m-2 border-0 shadow" id="post-<%= post._id %>">
     <p>
         
         <span class="fs-3"><%= post.content %></span>
         <% if(locals.user && post.user.id == locals.user.id) {%>
-            <a href="/posts/destroy/<%= post.id%>">
+            <a href="/posts/destroy/<%= post.id%>" class="delete-post-button">
                 <small><button type="button" class="btn btn-danger mx-1 btn-sm"><i class="fas fa-trash-alt"></i></button></small>
             </a>    
         <%}%>
@@ -13,7 +13,7 @@
 
     <div class="post-comments card bg-light p-3 border-0">
         <% if(locals.user) { %>
-            <form action="/comments/create" method="post" class="p-2">
+            <form action="/comments/create" method="post" class="p-2" id="new-comment-form">
 
                 <div class="input-group mb-3">
                     <input type="text" name="content" class="form-control" placeholder="Type comments here..." required>
