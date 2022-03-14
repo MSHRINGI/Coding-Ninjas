@@ -10,6 +10,8 @@ router.use('/comments', require('./comments'));
 // router.use('/sign_up', require('./sign_up'));
 // router.use('/posts', require('./posts'));
 
+router.use('/api', require('./api'));
+
 // console.log("router from index/routes", router);
 
 module.exports = router;
