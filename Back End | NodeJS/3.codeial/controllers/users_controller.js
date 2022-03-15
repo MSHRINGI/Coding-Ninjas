@@ -108,7 +108,7 @@ module.exports.create = function(req, res){
         if(!user){
             User.create(req.body, function(err, user){
                 if(err){
-                    console.log("Error in creating the user while sign up");
+                    console.log("Error in creating the user while sign up", err);
                     return;
                 }
                 req.flash('success', 'User created successfully');
