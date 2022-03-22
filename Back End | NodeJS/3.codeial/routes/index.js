@@ -6,6 +6,7 @@ router.get('/', homeController.home);
 router.use('/users', require('./users'));
 router.use('/posts', require('./posts'));
 router.use('/comments', require('./comments'));
+router.use('/likes', require('./likes'));
 // router.use('/sign_in', require('./sign_in'));
 // router.use('/sign_up', require('./sign_up'));
 // router.use('/posts', require('./posts'));
