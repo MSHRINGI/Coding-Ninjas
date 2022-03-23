@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/chat_box.css">
 <!-- <h1> This is the home page of <%= title %>.</h1> -->
 
 <div class="d-flex">
@@ -36,7 +37,20 @@
             <%}%>
         </section>
     </div>
+
+    <%- include('_chat_box') -%>
+
 </div>
 
 <script src="/js/home_posts.js"></script>
 <script src="/js/home_comments.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js" integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/chat_engine.js"></script>
+
+<% if(locals.user) {%>
+    <script>
+        new ChatEngine('user-chat-box', '<%= locals.user.email %>')
+    </script>
+<%}%>
