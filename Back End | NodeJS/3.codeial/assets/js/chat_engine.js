@@ -2,7 +2,7 @@ class ChatEngine{
     constructor(chatBoxId, userEmail){
         this.chatBox = $(`${chatBoxId}`);
         this.userEmail = userEmail;
-
+        // from internet
         let connectionOptions =  {
             "force new connection" : true,
             "reconnectionAttempts": "Infinity", 
@@ -34,9 +34,11 @@ class ChatEngine{
             $('#send-message').click(function(){
                 let msg = $('#chat-message-input').val();
                 // console.log("Button clicked and msg= ", msg);
-                if(msg != ""){
+                let message = msg;
+                document.getElementById("chat-message-input").value = "";
+                if(message != ""){
                     self.socket.emit('send-message', {
-                        message : msg,
+                        message : message,
                         user_email : self.userEmail,
                         chatroom : 'codeial'
                     });

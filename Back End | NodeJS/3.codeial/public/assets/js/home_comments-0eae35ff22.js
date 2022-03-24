@@ -1,0 +1,1 @@
+(function(){let e=$("#new-comment-form");$(e).submit((function(o){o.preventDefault(),$.ajax({type:"post",url:"/comments/create",data:e.serialize(),success:function(e){console.log(e.data)},error:function(e){console.log(e)}})}))})();
