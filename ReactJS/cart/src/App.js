@@ -3,35 +3,32 @@
 import Cart from "./Cart";
 import Navbar from "./Navbar";
 import React from "react";
+import firebase from "firebase";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: [
-        {
-          title: "Watch",
-          price: 99,
-          qty: 1,
-          img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80',
-          id: 1
-        },
-        {
-          title: "Phone",
-          price: 999,
-          qty: 12,
-          img: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
-          id: 2
-        },
-        {
-          title: "Laptop",
-          price: 9899,
-          qty: 4,
-          img: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          id: 3
-        }
-      ]
+      products: [],
+      loading: true
     }
+  }
+
+  componentDidMount(){
+    firebase
+      .firestore()
+      .collection('products')
+      .onSnapshot((snapshot) => {
+        const products = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          data['id'] = doc.id;
+          return data;
+        });
+        this.setState({
+          products: products,
+          loading : false
+        });
+      });
   }
 
   handleIncreaseQuantity = (product) => {
@@ -80,7 +77,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     return (
       <div className="App">
         <Navbar count={this.getCartCount()}/>
@@ -90,6 +87,7 @@ class App extends React.Component {
           onDecreaseQuantity={this.handleDecreaseQuantity}
           onDeleteProduct={this.handleDeleteProduct}
         />
+        { loading && <h1> Products Loading...</h1>}
         <div>
           <span>Total : {this.getCartTotal()} </span>
         </div>
