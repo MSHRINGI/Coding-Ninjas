@@ -2,7 +2,7 @@ import React from 'react';
 import MovieCard from './MovieCard';
 import Navbar from './Navbar';
 import { data } from '../data';
-import { addMovies, setShowFavourites } from '../actions'
+import { addMovies, setShowFavourites } from '../actions';
 
 class App extends React.Component {
   componentDidMount(){
@@ -18,8 +18,8 @@ class App extends React.Component {
     console.log("DISPATCHED", store.getState());
   }
   isMovieFavourite = (movie) => {
-    const { favourites } = this.props.store.getState();
-    const index = favourites.indexOf(movie);
+    const { movies } = this.props.store.getState();
+    const index = movies.favourites.indexOf(movie);
 
     if(index !== -1){
       // movie found
@@ -33,11 +33,13 @@ class App extends React.Component {
   }
   render(){
     console.log("RenDER", this.props.store.getState());
-    const { list, favourites, showFavourites } = this.props.store.getState();
+    const { movies } = this.props.store.getState();
+    const { list, favourites, showFavourites } = movies;
+    const { search } = this.props.store.getState();
     const displayMovie = showFavourites ? favourites : list
     return (
       <div className="App">
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={ search }/>
         <div className='main'>
           <div className='tabs'>
             <div className={`tab ${showFavourites ? '' : 'active-tabs'}`} onClick={() => this.changeTab(false)}>Movies</div>
