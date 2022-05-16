@@ -25,7 +25,7 @@ import rootReducer from './reducers';
 const logger = ({dispatch, getState}) => next => action =>{
   // middleware code
   if(typeof action !== 'function'){
-    console.log("APPLY_TYPE = ", action.type);
+    console.log("ACTION_TYPE = ", action.type);
   }
   next(action);
 }
@@ -100,6 +100,5 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <App  />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
